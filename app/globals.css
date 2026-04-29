@@ -1,0 +1,35 @@
+body {
+  background-color: #282828;
+  color: #f8f32b;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
+
+button {
+  background-color: #f8f32b;
+  color: #282828;
+  padding: 15px 30px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f0e130;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #f8f32b;
+  background-color: #282828;
+  color: #f8f32b;
+}
+
+.error {
+  color: red;
+  font-size: 16px;
+  margin-top: 20px;
+}

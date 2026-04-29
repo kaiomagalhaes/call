@@ -4,13 +4,20 @@ export const metadata = {
 
 export default function SuccessPage() {
   return (
-    <>
-      <h1>Batman is on his way!</h1>
+    <main>
+      <h1>The Bat is en route.</h1>
+      <p className="tagline">
+        Stay where you are. Try not to die. He prefers a clean scene.
+      </p>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
+        className="success-image"
         src="https://i.ytimg.com/vi/i00wXlIktog/sddefault.jpg"
-        alt="Batman"
+        alt="Batman, brooding, on his way"
       />
-    </>
+      <p className="fineprint">
+        ETA: dramatically. Estimated property damage: moderate.
+      </p>
+    </main>
   );
 }

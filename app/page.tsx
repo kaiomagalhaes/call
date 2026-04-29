@@ -2,9 +2,9 @@ import { callBatmanAction } from "./actions";
 
 const ERROR_MESSAGES: Record<string, string> = {
   not_allowed:
-    "It sounds like you're not allowed to call Batman here, try his phone number instead.",
+    "Gotham PD says no. Try Batman's pager — and good luck with that.",
   alert_failed:
-    "We couldn't reach Batman right now. Please try again in a moment.",
+    "The Bat-Signal flickered out. Take a breath and try again, citizen.",
 };
 
 export default async function Home({
@@ -16,8 +16,11 @@ export default async function Home({
   const errorMessage = error ? ERROR_MESSAGES[error] : undefined;
 
   return (
-    <>
-      <h1>Call Batman</h1>
+    <main>
+      <h1>Bat-Signal Hotline</h1>
+      <p className="tagline">
+        Type a name. Light the sky. Hope for the best.
+      </p>
 
       {errorMessage && <p className="error">{errorMessage}</p>}
 
@@ -25,12 +28,17 @@ export default async function Home({
         <input
           type="text"
           name="victim_name"
-          placeholder="Enter Cop's Name"
+          placeholder="e.g. Commissioner Gordon"
+          aria-label="Name of the cop in distress"
+          autoComplete="off"
           required
         />
-        <br />
-        <button type="submit">Call Batman</button>
+        <button type="submit">Light the Signal</button>
       </form>
-    </>
+
+      <p className="fineprint">
+        Service hours: dusk till dawn. Riddlers and clowns ineligible.
+      </p>
+    </main>
   );
 }

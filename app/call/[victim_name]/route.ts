@@ -13,7 +13,7 @@ export async function GET(
     return NextResponse.redirect(new URL("/?error=1", request.url));
   }
 
-  const success = await triggerBatmanAlert();
+  const success = await triggerBatmanAlert(name);
   return NextResponse.redirect(
     new URL(success ? "/success" : "/", request.url),
   );

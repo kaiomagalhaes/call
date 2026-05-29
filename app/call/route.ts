@@ -16,7 +16,7 @@ export async function POST(request: Request): Promise<Response> {
 
   let success = false;
   try {
-    success = await triggerBatmanAlert();
+    success = await triggerBatmanAlert(name);
   } catch {
     success = false;
   }

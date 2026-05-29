@@ -1,26 +1,29 @@
+import type { Metadata } from "next";
 import { callBatmanAction } from "./actions";
+import { getMessages } from "./lib/i18n";
 
-const ERROR_MESSAGES: Record<string, string> = {
-  not_allowed:
-    "Gotham PD says no. Try Batman's pager — and good luck with that.",
-  alert_failed:
-    "The Bat-Signal flickered out. Take a breath and try again, citizen.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { t } = await getMessages();
+  return { title: t.homeMetaTitle };
+}
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
-  const { error } = await searchParams;
-  const errorMessage = error ? ERROR_MESSAGES[error] : undefined;
+  const [{ error }, { t }] = await Promise.all([searchParams, getMessages()]);
+  const errorMessage =
+    error === "not_allowed"
+      ? t.errorNotAllowed
+      : error === "alert_failed"
+        ? t.errorAlertFailed
+        : undefined;
 
   return (
     <main>
-      <h1>Bat-Signal Hotline</h1>
-      <p className="tagline">
-        Type a name. Light the sky. Hope for the best.
-      </p>
+      <h1>{t.title}</h1>
+      <p className="tagline">{t.tagline}</p>
 
       {errorMessage && <p className="error">{errorMessage}</p>}
 
@@ -28,17 +31,15 @@ export default async function Home({
         <input
           type="text"
           name="victim_name"
-          placeholder="e.g. Commissioner Gordon"
-          aria-label="Name of the cop in distress"
+          placeholder={t.placeholder}
+          aria-label={t.inputLabel}
           autoComplete="off"
           required
         />
-        <button type="submit">Light the Signal</button>
+        <button type="submit">{t.button}</button>
       </form>
 
-      <p className="fineprint">
-        Service hours: dusk till dawn. Riddlers and clowns ineligible.
-      </p>
+      <p className="fineprint">{t.fineprint}</p>
     </main>
   );
 }
